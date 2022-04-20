@@ -1,24 +1,36 @@
-# README
+# bikeen
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+バイクのあれこれを共有できる女性専用のバイクSNSです🏍
 
-Things you may want to cover:
+### サイトテーマ
+バイク情報のシェア
 
-* Ruby version
+### テーマを選んだ理由
+・バイク仲間と繋がりたい
+・バイクの楽しさを知ってもらい、SNSを通して女性ライダーを増やしたい
 
-* System dependencies
+### ターゲットユーザ
+・バイクが大好きな女性ライダー
+・バイクに興味がある女性
+・バイクについて情報を共有したい方
 
-* Configuration
+### 主な利用シーン
+ツーリングスポット、愛車紹介などなど...
+バイクに関する情報を見たい、発信したい、共有したい時
 
-* Database creation
+## 設計書
+<...>
 
-* Database initialization
+## チャレンジ要素一覧
+https://docs.google.com/spreadsheets/d/1HVIUmHNpqI-EydwGuXnCf0tE7IH9uVjI_OruwBivG5A/edit#gid=0
 
-* How to run the test suite
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
+- 追加予定
