@@ -33,8 +33,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       # t.datetime :locked_at
 
       ## カラム追加
-      t.string  :name,       null: false                # 名前
-      t.string  :model_name, null: false                # バイク機種名
+      t.string  :name                                   # 名前
+      t.string  :bike_model                             # バイク機種名
       t.text    :introduction                           # 自己紹介
       t.string  :residence                              # 居住地
       t.boolean :is_active,  null: false, default: true # 退会ステータス

@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class User::RegistrationsController < Devise::RegistrationsController
+  def after_sign_in_path_for(resource) ## Sign up後遷移先
+    about_path ## my profileへ変更
+  end
+
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 

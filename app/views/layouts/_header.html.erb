@@ -1,0 +1,28 @@
+<!-- ヘッダー部分テンプレ -->
+<% if user_signed_in? %> <!-- Loginヘッダー -->
+  <li>
+    <%= link_to "Home" %>
+  </li>
+  <li>
+    <%= link_to "New post" %>
+  </li>
+  <li>
+    <%= link_to "Noice" %>
+  </li>
+  <li>
+    <%= link_to "my profile" %>
+  </li>
+  <li>
+    <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+  </li>
+<% else %> <!-- Logoutヘッダー -->
+  <li>
+    <%= link_to "About", about_path %>
+  </li>
+  <li>
+    <%= link_to "New customer", new_user_registration_path %>
+  </li>
+  <li>
+    <%= link_to "Log in", new_user_session_path %>
+  </li>
+<% end %>

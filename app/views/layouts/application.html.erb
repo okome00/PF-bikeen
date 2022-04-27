@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PFBikeen</title>
+    <title>bikeen</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,16 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header> <!-- ヘッダー部分テンプレ -->
+      <%= render 'layouts/header' %>
+    </header>
+
+    <main> <!-- メイン画面 -->
+      <%= yield %>
+    </main>
+
+    <footer> <!-- フッター部分テンプレ -->
+      <%= render 'layouts/footer' %>
+    </footer>
   </body>
 </html>
