@@ -1,0 +1,12 @@
+<!-- 投稿一覧画面 -->
+<h1>投稿一覧</h1>
+
+<% @posts.each do |post| %>
+  <div class="post-list">
+    <%= link_to post_path(post.id) do %>
+      <%= image_tag post.get_images %>
+      <%= post.content %>
+      <%= post.spot %>
+    <% end %>
+  </div>
+<% end %>

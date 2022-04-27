@@ -77,4 +77,7 @@ Rails.application.configure do
   # ホスト許可
   config.hosts << "09a4643298b74330806b877df07e0046.vfs.cloud9.us-east-1.amazonaws.com"
 
+  # ActiveStorageエラー回避
+  config.active_job.queue_adapter = :inline
+
 end

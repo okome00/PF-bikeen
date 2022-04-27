@@ -1,0 +1,21 @@
+<!-- 新規投稿画面 -->
+<h1>新規投稿</h1>
+
+<%= form_woth model: @post, url: posts_path do |f| %>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>画像/動画</th>
+        <td><%= f.file_field :image, accept: "images/*", accept: "movie/*" %></td>
+      </tr>
+      <tr>
+        <th>投稿内容</th>
+        <td><%= f.text_field :content %></td>
+      </tr>
+      <tr>
+        <th>スポット</th>
+        <td><%= f.text_field :spot %></td>
+      </tr>
+    </tbody>
+  </table>
+
