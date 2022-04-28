@@ -1,15 +1,17 @@
 <!-- 投稿詳細画面 -->
 <h1>投稿詳細</h1>
 
-<div class="post-image">
+<div class="post-content">
+  <%= link_to my_page_path do %>
+    <%= image_tag @post.user.get_profile_image(40, 40)%>
+    <%= @user.name %>
+  <% end %>
   <% if @post.images.attached? %>
-    <%= image_tag @post.images, size: '300*300' %>
+    <%= image_tag @post.images[0], size: '100*100' %>
   <% end %>
   <% if @post.movie.attached? %>
     <%= image_tag @post.movie, size: '300*300' %>
   <% end %>
-</div>
-<div class="post-content">
   <%= @post.content %>
   <%= @post.spot %>
 </div>

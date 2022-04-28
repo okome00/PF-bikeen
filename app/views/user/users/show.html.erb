@@ -1,2 +1,39 @@
-<h1>User::Users#show</h1>
-<p>Find me in app/views/user/users/show.html.erb</p>
+<!-- マイページ画面 -->
+<h1>マイページ</h1>
+
+<table>
+  <tr>
+    <td><%= image_tag @user.get_profile_image(100, 100) %></td>
+    <td><%= @user.name %></td>
+    <td>
+      <% if @user == current_user %>
+        <%= link_to "プロフィールを編集する", edit_user_path %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>バイク機種</th>
+    <td><%= @user.bike_model %></td>
+  </tr>
+  <tr>
+    <th>居住地</th>
+    <td><%= @user.residence %></td>
+  </tr>
+  <tr>
+    <th>自己紹介</th>
+    <td><%= @user.introduction %></td>
+  </tr>
+</table>
+
+<% @posts.each do |post| %>
+  <%= link_to post_path(post.id) do %>
+    <% if post.images.attached? %>
+      <%= image_tag post.images[0], size: '100*100' %>
+    <% end %>
+    <% if post.movie.attached? %>
+      <%= image_tag post.movie, size: '100*100' %>
+    <% end %>
+    <%= post.content %>
+  <% end %>
+<% end %>
+
