@@ -1,10 +1,10 @@
 <!-- ヘッダー部分テンプレ -->
 <% if user_signed_in? %> <!-- Loginヘッダー -->
   <li>
-    <%= link_to "Home" %>
+    <%= link_to "Home", posts_path %>
   </li>
   <li>
-    <%= link_to "New post" %>
+    <%= link_to "New post", new_post_path %>
   </li>
   <li>
     <%= link_to "Noice" %>

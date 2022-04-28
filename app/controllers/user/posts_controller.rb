@@ -1,4 +1,6 @@
 class User::PostsController < ApplicationController
+  before_action :authenticate_user! ## ログイン権限
+
   def new ## 新規投稿アクション
     @post = Post.new
   end

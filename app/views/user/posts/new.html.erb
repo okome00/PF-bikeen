@@ -1,16 +1,20 @@
 <!-- 新規投稿画面 -->
 <h1>新規投稿</h1>
 
-<%= form_woth model: @post, url: posts_path do |f| %>
+<%= form_with model: @post, url: posts_path do |f| %>
   <table class="table">
     <tbody>
       <tr>
-        <th>画像/動画</th>
-        <td><%= f.file_field :image, accept: "images/*", accept: "movie/*" %></td>
+        <th>画像</th>
+        <td><%= f.file_field :images, multiple: true %></td>
+      </tr>
+      <tr>
+        <th>動画</th>
+        <td><%= f.file_field :movie, accept: "movie/*" %></td>
       </tr>
       <tr>
         <th>投稿内容</th>
-        <td><%= f.text_field :content %></td>
+        <td><%= f.text_area :content %></td>
       </tr>
       <tr>
         <th>スポット</th>
@@ -18,4 +22,9 @@
       </tr>
     </tbody>
   </table>
+
+  <div class="action">
+    <%= f.submit "投稿する" %>
+  </div>
+<% end %>
 

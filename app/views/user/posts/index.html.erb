@@ -4,7 +4,12 @@
 <% @posts.each do |post| %>
   <div class="post-list">
     <%= link_to post_path(post.id) do %>
-      <%= image_tag post.get_images %>
+      <% if post.images.attached? %>
+        <%= image_tag post.images[0], size: '100*100' %>
+      <% end %>
+      <% if post.movie.attached? %>
+        <%= image_tag post.movie, size: '300*300' %>
+      <% end %>
       <%= post.content %>
       <%= post.spot %>
     <% end %>
