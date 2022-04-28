@@ -22,6 +22,7 @@ class User::PostsController < ApplicationController
   def show ## 投稿詳細表示アクション
     @post = Post.find(params[:id])
     @user = @post.user
+    @post_comment = PostComent.new
   end
 
   def destroy ## 投稿削除アクション

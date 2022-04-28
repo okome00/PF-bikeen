@@ -4,7 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :posts, dependent: :destroy ## Postモデルとの紐付け
+  has_many :posts,         dependent: :destroy ## Postモデルとの紐付け
+  has_many :post_comments, dependent: :destroy ## PostCommentモデルとの紐付け
 
   has_one_attached :profile_image ## ActiveStorageでプロフィール画像表示
 
