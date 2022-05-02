@@ -5,13 +5,16 @@
   <div class="post-list">
     <%= link_to post_path(post.id) do %>
       <% if post.images.attached? %>
-        <%= image_tag post.images[0], size: '100*100' %>
+        <%= image_tag post.images[0], size: '100*100' %><br/>
       <% end %>
       <% if post.movie.attached? %>
-        <%= image_tag post.movie, size: '100*100' %>
+        <%= video_tag rails_blob_path(post.movie), size: '100*100' %><br/>
       <% end %>
       <%= post.content %>
       <%= post.spot %>
+      <p>
+        <strong>コメント数 </strong><%= post.post_comments.count %>
+      </p>
     <% end %>
   </div>
 <% end %>

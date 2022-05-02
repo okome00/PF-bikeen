@@ -2,21 +2,51 @@
 <h1>投稿詳細</h1>
 
 <div class="post-content">
-  <%= link_to my_page_path do %>
-    <%= image_tag @post.user.get_profile_image(40, 40)%>
+  <%= link_to user_path(@post.user.id) do %>
+    <%= image_tag @post.user.get_profile_image(50, 50)%>
     <%= @user.name %>
   <% end %>
   <% if @post.images.attached? %>
     <%= image_tag @post.images[0], size: '100*100' %>
   <% end %>
   <% if @post.movie.attached? %>
-    <%= image_tag @post.movie, size: '300*300' %>
+    <%= video_tag rails_blob_path(@post.movie), size: '300*300' %>
   <% end %>
-  <%= @post.content %>
-  <%= @post.spot %>
+  <p><%= @post.content %></p>
+  <p><%= @post.spot %></p>
 </div>
-<div class="post-destroy">
+<div class="post-action">
+  <strpmg>コメント数 </strong><%= @post.post_comments.count %>
+  <% if @post.favorited_by?(current_user) %>
+    <%= link_to post_favorites_path(@post), method: :delete do %>
+      <strong>♥ </strong><%= @post.favorites.count %>
+    <% end %>
+  <% else %>
+    <%= link_to post_favorites_path(@post), method: :post do %>
+      <strong>♡ </strong><%= @post.favorites.count %>
+    <% end %>
+  <% end %>
   <% if @post.user == current_user %>
     <%= link_to "destroy", post_path(@post.id), method: :delete, data: { confirm: "本当に削除しますか?" } %>
+  <% end %>
+</div>
+
+<div class="post-comment">
+  <% @post.post_comments.each do |post_comment| %>
+    <%= link_to user_path(post_comment.user.id) do %>
+      <%= image_tag post_comment.user.get_profile_image(50, 50) %>
+      <%= post_comment.user.name %>
+    <% end %>
+    <%= l post_comment.created_at %>
+    <%= post_comment.content %>
+    <% if post_comment.user == current_user %>
+      <%= link_to "コメントを削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
+    <% end %>
+  <% end %>
+</div>
+<div class="post-comment-create">
+  <%= form_with model: [@post, @post_comment] do |f| %>
+    <%= f.text_area :content, rows: '5', placeholder: "コメントを入力してください" %>
+    <%= f.submit "コメントを投稿" %>
   <% end %>
 </div>

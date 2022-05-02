@@ -2,12 +2,17 @@ class User::UsersController < ApplicationController
   before_action :authenticate_user! ## ログイン権限
 
   def show ## 会員情報画面表示アクション
-    @user = current_user
+    @user = User.find(params[:id])
     @posts = @user.posts
   end
 
   def edit ## 会員情報編集画面表示アクション
-    @user = current_user
+    @user = User.find(params[:id])
+    if @user.id == current_user.id ## 他ユーザーのプロフィール編集画面に遷移できないように設定
+      render :edit
+    else
+      redirect_to user_path(current_user.id)
+    end
   end
 
   def update ## 会員情報編集アクション

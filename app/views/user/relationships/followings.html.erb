@@ -1,0 +1,14 @@
+<!-- フォロー一覧画面 -->
+<h1>フォロー一覧</h1>
+
+<% if @users.exists? %>
+  <% @users.each do |user| %>
+    <%= link_to user_path(user.id) do %>
+      <%= image_tag user.get_profile_image(100, 100) %>
+      <%= user.name %><br />
+      <%= user.introduction %>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>ユーザーはいません</p>
+<% end %>

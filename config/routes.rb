@@ -6,9 +6,14 @@ Rails.application.routes.draw do
     get   '/about'         => 'homes#about',  as: 'about'               ## aboutページルーディング
     get   '/posts/search'  => 'posts#search', as: 'search'              ## searchページルーディング
     resources :posts, only: [:new, :create, :index, :show, :destroy] do ## Postルーディング
-      resources :post_comments, only: [:create]                         ## PostCommentルーディング
+      resources :post_comments, only: [:create, :destroy]               ## PostCommentルーディング
+      resource  :favorites,     only: [:create, :destroy]               ## Favoriteルーディング
     end
-    resources :users, only: [:show, :edit, :update]                     ## Userルーディング
+    resources :users, only: [:show, :edit, :update] do                  ## Userルーディング
+      resource :relationships, only: [:create, :destroy]                ## Relationshipモデルルーディング
+      get 'followings' => 'relationships#followings', as: 'followings'  ## フォロー一覧ルーディング
+      get 'followers'  => 'relationships#followers',  as: 'followers'   ## フォロワー一覧ルーディング
+    end
   end
 
 end
