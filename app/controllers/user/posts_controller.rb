@@ -30,6 +30,12 @@ class User::PostsController < ApplicationController
     @post.destroy
     redirect_to posts_path
   end
+  
+  def hashtag
+    @user = current_user
+    @tag = Hashtag.find_by(hashtag_name: params[:name])
+    @posts = @tag.posts
+  end
 
   private ## 投稿データストロングパラメータ
 

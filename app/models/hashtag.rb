@@ -1,6 +1,5 @@
 class Hashtag < ApplicationRecord
-  has_many :post_hashtags, dependent: :destroy ## PostHashtagモデルとの紐付け
-  has_many :posts, through: :post_hashtags     ## Postモデルとの紐付け
+  has_and_belongs_to_many :posts ## Postモデルとの紐付け(多対多の関係)
   
-  validates :hashtag_name, presence: true, length: { maximum: 50 }
+  validates :hashtag_name, presence: true, length: { maximum: 99 }
 end
