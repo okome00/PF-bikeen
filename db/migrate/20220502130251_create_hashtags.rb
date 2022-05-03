@@ -6,6 +6,5 @@ class CreateHashtags < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-    add_index :hashtags, :hashtag_name, unique: true
   end
 end

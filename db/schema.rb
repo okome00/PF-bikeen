@@ -51,7 +51,6 @@ ActiveRecord::Schema.define(version: 2022_05_02_130843) do
     t.string "hashtag_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["hashtag_name"], name: "index_hashtags_on_hashtag_name", unique: true
   end
 
   create_table "post_comments", force: :cascade do |t|
@@ -67,8 +66,6 @@ ActiveRecord::Schema.define(version: 2022_05_02_130843) do
     t.integer "hashtag_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["hashtag_id"], name: "index_post_hashtags_on_hashtag_id"
-    t.index ["post_id"], name: "index_post_hashtags_on_post_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -105,6 +102,4 @@ ActiveRecord::Schema.define(version: 2022_05_02_130843) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "post_hashtags", "hashtags"
-  add_foreign_key "post_hashtags", "posts"
 end

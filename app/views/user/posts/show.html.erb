@@ -2,10 +2,10 @@
 <h1>投稿詳細</h1>
 
 <div class="post-content">
-  <%= l @post.created_at %>
+  <%= l @post.created_at %><br />
   <%= link_to user_path(@post.user.id) do %>
     <%= image_tag @post.user.get_profile_image(50, 50) %>
-    <%= @user.name %>
+    <%= @user.name %><br />
   <% end %>
   <% if @post.images.attached? %>
     <%= image_tag @post.images[0], size: '100*100' %>

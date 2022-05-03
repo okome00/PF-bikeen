@@ -7,7 +7,9 @@
     <%= post.user.name %>
   <% end %>
   <%= link_to post_path(post.id) do %>
-    <%= image_tag @post.images[0], size: '100*100' %>
+    <% if @post.images.attached? %>
+      <%= image_tag @post.images[0], size: '100*100' %>
+    <% end %>
     コメント: <%= post.post_comments.count %>
     いいね！: <%= post.favorites.count %>
     <%= l post.created_at %>
