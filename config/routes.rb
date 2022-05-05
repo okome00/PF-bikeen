@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users ## Userテーブルルーディング
-
-  scope module: :user do ## Userルーディング纏め
-    root to: 'homes#top' ## topページルーディング
-    get   '/about'              => 'homes#about',  as: 'about'          ## aboutページルーディング
+  devise_for :users, skip: [:passwords], controllers: {                                     ## Userテーブルルーディング
+    registrations: "user/registrations",
+    sessions:      "user/sessions"
+}
+  scope module: :user do                                                ## Userルーディング纏め
+    root to: 'homes#top'                                                ## topページルーディング
     get   '/posts/search'       => 'posts#search', as: 'search'         ## searchページルーディング
+    get   '/post/hashtag/:name' => 'posts#hashtag'                      ## hashtagページルーディング
+    get   '/post/hashtag'       => 'posts#hashtag'
     resources :posts, only: [:new, :create, :index, :show, :destroy] do ## Postルーディング
       resources :post_comments, only: [:create, :destroy]               ## PostCommentルーディング
       resource  :favorites,     only: [:create, :destroy]               ## Favoriteルーディング
@@ -14,7 +17,5 @@ Rails.application.routes.draw do
       get 'followings' => 'relationships#followings', as: 'followings'  ## フォロー一覧ルーディング
       get 'followers'  => 'relationships#followers',  as: 'followers'   ## フォロワー一覧ルーディング
     end
-    resources :hashtags, only: [:index, :show]                          ## Hashtagモデル     
   end
-
 end

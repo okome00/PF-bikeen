@@ -2,24 +2,31 @@
 <html>
   <head>
     <title>bikeen</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+    <!-- CSS反映 -->
+    <!-- Bootstrap反映 -->
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <header> <!-- ヘッダー部分テンプレ -->
+    <header class="shadow-sm"> <!-- ヘッダー部分テンプレ -->
       <%= render 'layouts/header' %>
     </header>
 
-    <main> <!-- メイン画面 -->
+    <p id="notice">
+      <%= notice %>
+    </p>
+
+    <main class="mb-auto"> <!-- メイン画面 -->
       <%= yield %>
     </main>
 
-    <footer> <!-- フッター部分テンプレ -->
+    <footer class="bg-dark text-white pt-5 pb-4"> <!-- フッター部分テンプレ -->
       <%= render 'layouts/footer' %>
     </footer>
   </body>

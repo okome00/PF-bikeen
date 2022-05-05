@@ -13,3 +13,43 @@
  *= require_tree .
  *= require_self
  */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 共通 */
+a:hover {
+  color: #0056b3;
+}
+
+.field, .action {
+  margin-bottom: 15px;
+}
+
+.signin-field {
+  margin-bottom: 30px;
+}
+
+.signin-field-image {
+  display: flex;
+  justify-content: center;
+}
+
+.icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50px;
+  margin-right: 20px;
+  margin-bottom: 15px;
+}
+
+.icon:last-child {
+  margin-right: 0;
+}
+
+.signup-link {
+  margin-left: 10px;
+}
