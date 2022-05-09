@@ -3,6 +3,7 @@ class User::PostsController < ApplicationController
 
   def new ## 新規投稿アクション
     @post = Post.new
+    @user = current_user
   end
 
   def create ## 投稿アクション

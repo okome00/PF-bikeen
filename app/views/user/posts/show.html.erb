@@ -1,54 +1,72 @@
 <!-- 投稿詳細画面 -->
-<h1>投稿詳細</h1>
+<div class="post-content py-5">
+  <div class="card w-75 mx-auto mt-4 mb-4 shadow-lg">
+    <div class="row">
+      <div class="col-md-6">
+        <% if @post.images.attached? %>
+          <%= image_tag @post.images[0], size: '100*100', class: "card-img-left" %>
+        <% end %>
+        <% if @post.movie.attached? %>
+          <%= video_tag rails_blob_path(@post.movie), size: '300*300' %>
+        <% end %>
+      </div>
 
-<div class="post-content">
-  <%= l @post.created_at %><br />
-  <%= link_to user_path(@post.user.id) do %>
-    <%= image_tag @post.user.get_profile_image(50, 50) %>
-    <%= @user.name %><br />
-  <% end %>
-  <% if @post.images.attached? %>
-    <%= image_tag @post.images[0], size: '100*100' %>
-  <% end %>
-  <% if @post.movie.attached? %>
-    <%= video_tag rails_blob_path(@post.movie), size: '300*300' %>
-  <% end %>
-  <p><%= @post.content %></p>
-  <p><%= render_with_hashtags(@post.hashbody) %></p>
-  <p><%= @post.spot %></p>
-</div>
-<div class="post-action">
-  <strpmg>コメント数: </strong><%= @post.post_comments.count %>
-  <% if @post.favorited_by?(current_user) %>
-    <%= link_to post_favorites_path(@post), method: :delete do %>
-      <strong>♥ </strong><%= @post.favorites.count %>
-    <% end %>
-  <% else %>
-    <%= link_to post_favorites_path(@post), method: :post do %>
-      <strong>♡ </strong><%= @post.favorites.count %>
-    <% end %>
-  <% end %>
-  <% if @post.user == current_user %>
-    <%= link_to "destroy", post_path(@post.id), method: :delete, data: { confirm: "本当に削除しますか?" } %>
-  <% end %>
-</div>
+      <div class="card-body">
+        <div class="col-md-7 d-flex">
+          <%= link_to user_path(@post.user.id) do %>
+            <%= image_tag @post.user.get_profile_image(50, 70), class: "rounded-circle" %>
+            <strong><%= @user.name %><strong>
+          <% end %>
+        </div>
 
-<div class="post-comment">
-  <% @post.post_comments.each do |post_comment| %>
-    <%= link_to user_path(post_comment.user.id) do %>
-      <%= image_tag post_comment.user.get_profile_image(50, 50) %>
-      <%= post_comment.user.name %>
-    <% end %>
-    <%= l post_comment.created_at %>
-    <%= post_comment.content %>
-    <% if post_comment.user == current_user %>
-      <%= link_to "コメントを削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
-    <% end %>
-  <% end %>
-</div>
-<div class="post-comment-create">
-  <%= form_with model: [@post, @post_comment] do |f| %>
-    <%= f.text_area :content, rows: '5', placeholder: "コメントを入力してください" %>
-    <%= f.submit "コメントを投稿" %>
-  <% end %>
+        <hr>
+        <p class="card-title"><%= @post.content %></p>
+        <p class="card-title"><%= render_with_hashtags(@post.hashbody) %></p>
+        <p class="card-title"><%= @post.spot %></p>
+        <span><i class="fas fa-calendar"></i><%= l @post.created_at %>　|　</span>
+        <span>
+          <% if @post.favorited_by?(current_user) %>
+          <%= link_to post_favorites_path(@post), method: :delete do %>
+            <i class="fas fa-heart" style="color: #000;"></i><%= @post.favorites.count %>
+          <% end %>
+          <% else %>
+            <%= link_to post_favorites_path(@post), method: :post do %>
+              <i class="fas fa-heart" style="color: #000;"></i><%= @post.favorites.count %>
+            <% end %>
+          <% end %>
+        </span>
+        <span><i class="fas fa-comments"></i><%= @post.post_comments.count %>　|　</span>
+        <span>
+          <% if @post.user == current_user %>
+            <%= link_to post_path(@post.id), method: :delete, data: { confirm: "本当に削除しますか?" }, class: "text-dark" do %>
+              <i class="fas fa-trash-can"></i>
+            <% end %>
+          <% end %>
+        </span>
+
+        <hr>
+        <div class="post-comment card-text">
+          <% @post.post_comments.each do |post_comment| %>
+            <%= link_to user_path(post_comment.user.id) do %>
+              <%= image_tag post_comment.user.get_profile_image(50, 50) %>
+              <%= post_comment.user.name %>
+            <% end %>
+            <%= l post_comment.created_at %>
+            <%= post_comment.content %>
+            <% if post_comment.user == current_user %>
+              <%= link_to "コメントを削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
+            <% end %>
+          <% end %>
+        </div>
+
+        <hr>
+        <div class="field">
+          <%= form_with model: [@post, @post_comment] do |f| %>
+            <%= f.text_area :content, rows: '5', placeholder: "コメントを追加" %>
+            <%= f.submit "コメントを投稿", class: "btn btn-dark btn-sm" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

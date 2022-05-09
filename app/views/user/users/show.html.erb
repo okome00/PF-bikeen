@@ -1,60 +1,57 @@
 <!-- マイページ画面 -->
-<h1>マイページ</h1>
-
-<table>
-  <tr>
-    <td><%= image_tag @user.get_profile_image(100, 100) %></td>
-    <td><%= @user.name %></td>
-    <td>
+<div class="conteiner profile-wrap">
+  <div class="row">
+    <div class="col-md-5 text-center">
+      <%= image_tag @user.get_profile_image(100, 100), class: "profile-icon" %>
+    </div>
+    <div class="col-md-7">
+      <div class="d-flex mb-3">
+        <h5 class="mr-4"><%= @user.name %></h5>
+        <% if @user == current_user %>
+          <%= link_to "プロフィールを編集", edit_user_path, class: "btn btn-outline-dark btn-sm font-weight-bold" %><br />
+        <% end %>
+      </div>
       <% if @user != current_user %>
         <% if current_user.following?(@user) %>
-          <%= link_to "フォローを外す", user_relationships_path(@user.id), method: :delete %>
+          <%= link_to "フォローを外す", user_relationships_path(@user.id), method: :delete, class: "btn btn-primary btn-sm" %>
         <% else %>
-          <%= link_to "フォローする", user_relationships_path(@user.id), method: :post %>
+          <%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class: "btn btn-outline-primary btn-sm" %>
         <% end %>
       <% end %>
-    </td>
-    <td>
-      <% if @user == current_user %>
-        <%= link_to "プロフィールを編集する", edit_user_path %>
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <%= link_to user_followings_path(@user) do %>
-        フォロー数 <%= @user.followings.count %>
-      <% end %>
-    </td>
-    <td>
-      <%= link_to user_followers_path(@user) do %>
-        フォロワー数 <%= @user.followers.count %>
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <th>バイク機種</th>
-    <td><%= @user.bike_model %></td>
-  </tr>
-  <tr>
-    <th>居住地</th>
-    <td><%= @user.residence %></td>
-  </tr>
-  <tr>
-    <th>自己紹介</th>
-    <td><%= @user.introduction %></td>
-  </tr>
-</table>
+      <div class="follow-field mb-3">
+        投稿<strong><%= @posts.count %></strong>件
+        <%= link_to user_followers_path(@user), class: "follower-link mr-3 ml-3" do %>
+          フォロワー
+          <strong><%= @user.followers.count %></strong>人
+        <% end %>
+        <%= link_to user_followings_path(@user), class: "follow-link" do %>
+          フォロー
+          <strong><%= @user.followings.count %></strong>人
+        <% end %>
+      </div>
+      <div class="profile-item">
+        <p><%= @user.introduction %></p>
+        バイク機種：<%= @user.bike_model %>
+        居住地：<%= @user.residence %>
+      </div>
+    </div>
 
-<% @posts.each do |post| %>
-  <%= link_to post_path(post.id) do %>
-    <% if post.images.attached? %>
-      <%= image_tag post.images[0], size: '100*100' %>
-    <% end %>
-    <% if post.movie.attached? %>
-      <%= image_tag post.movie, size: '100*100' %>
-    <% end %>
-    <%= post.content %>
-  <% end %>
-<% end %>
+    <div class="col-md-12 mt-5 my-post"></div>
+
+    <div class="row">
+      <% @posts.each do |post| %>
+        <div class="post-item">
+          <%= link_to post_path(post.id) do %>
+            <% if post.images.attached? %>
+              <%= image_tag post.images[0] %><br />
+            <% end %>
+            <% if post.movie.attached? %>
+              <%= image_tag post.movie %><br />
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 

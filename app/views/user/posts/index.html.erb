@@ -1,26 +1,21 @@
 <!-- 投稿一覧画面 -->
-<h1>投稿一覧</h1>
-
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <% @posts.each do |post| %>
-        <div class="post-list">
-          <%= link_to post_path(post.id) do %>
-            <% if post.images.attached? %>
-              <%= image_tag post.images[0], size: '100*100' %><br/>
-            <% end %>
-            <% if post.movie.attached? %>
-              <%= video_tag rails_blob_path(post.movie), size: '100*100' %><br/>
-            <% end %>
-            <%= post.content %>
-            <%= post.spot %>
-            <p>
-              <strong>コメント数 </strong><%= post.post_comments.count %>
-            </p>
+<div class="post-wrap">
+  <div class="post-content d-flex">
+    <% @posts.each do |post| %>
+      <div class="card" style="width: 18rem;">
+        <%= link_to post_path(post.id) do %>
+          <% if post.images.attached? %>
+            <%= image_tag post.images[0], class: "card-img-top" %>
           <% end %>
-        </div>
-      <% end %>
-    </div>
+          <% if post.movie.attached? %>
+            <%= video_tag rails_blob_path(post.movie), size: '100*100' %>
+          <% end %>
+          <div class="card-body">
+            <span><i class="fas fa-heart mr-2" style="color: #EF4868;"></i><strong style="color: #000;"><%= post.favorites.count %></strong></span>
+            <span><i class="fas fa-comments ml-3 mr-2" style="color: #000;"></i><strong style="color: #000;"><%= post.post_comments.count %></strong></span>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>

@@ -15,7 +15,7 @@
         <% if user_signed_in? %> <!-- Loginヘッダー -->
           <li class="nav-item">
             <%= link_to posts_path, class: "nav-link text-dark" do %>
-              <i class="fas fa-house-chimney"></i> Home
+              <i class="fas fa-house"></i> Home
             <% end %>
           </li>
           <li class="nav-item">
@@ -24,13 +24,13 @@
             <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to class: "nav-link text-dark" do %>
+            <%= link_to root_path, class: "nav-link text-dark" do %>
               <i class="fas fa-bell"></i> Noice
             <% end %>
           </li>
           <li class="nav-item">
             <%= link_to user_path(current_user.id), class: "nav-link text-dark" do %>
-              <i class="fas fa-face-hand-over-mouth"></i> My prolile
+              <i class="fas fa-address-card"></i> My prolile
             <% end %>
           </li>
           <li class="nav-item">

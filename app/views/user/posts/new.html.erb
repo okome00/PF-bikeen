@@ -1,34 +1,38 @@
 <!-- 新規投稿画面 -->
-<h1>新規投稿</h1>
+<div class="card-list-conteiner py-5 mb-5">
+  <div class="card w-50 mx-auto mt-4 shadow-lg text-center">
+    <h3 class="mt-5 mb-3">新規投稿</h3>
 
-<%= form_with model: @post, url: posts_path do |f| %>
-  <table class="table">
-    <tbody>
-      <tr>
-        <th>画像</th>
-        <td><%= f.file_field :images, multiple: true %></td>
-      </tr>
-      <tr>
-        <th>動画</th>
-        <td><%= f.file_field :movie %></td>
-      </tr>
-      <tr>
-        <th>投稿内容</th>
-        <td><%= f.text_area :content %></td>
-      </tr>
-      <tr>
-        <th>ハッシュタグ入力欄</th>
-        <td><%= f.text_area :hashbody %></td>
-      </tr>
-      <tr>
-        <th>スポット</th>
-        <td><%= f.text_field :spot %></td>
-      </tr>
-    </tbody>
-  </table>
+    <%= form_with model: @post, url: posts_path do |f| %>
+      <div class="field col-6 mx-auto">
+        <%= image_tag @user.get_profile_image(100, 100), class: "profile-icon mb-5" %><br />
+        <%= f.label :画像 %><br />
+        <%= f.file_field :images, multiple: true %>
+      </div>
 
-  <div class="action">
-    <%= f.submit "投稿する" %>
+      <div class="field col-6 mx-auto">
+        <%= f.label :動画 %><br />
+        <%= f.file_field :movie %>
+      </div>
+
+      <div class="field col-6 mx-auto">
+        <%= f.label :投稿内容 %><br />
+        <%= f.text_area :content, style: "width: 90%;" %>
+      </div>
+
+      <div class="field col-6 mx-auto">
+        <%= f.label :ハッシュタグ入力欄 %><br />
+        <%= f.text_area :hashbody, style: "width: 90%;" %>
+      </div>
+
+      <div class="field col-6 mx-auto">
+        <%= f.label:スポット %><br />
+        <%= f.text_field :spot, style: "width: 90%;" %>
+      </div>
+
+      <div class="action col-3 mx-auto mt-4">
+        <%= f.submit "投稿する", class: "btn btn-dark btn-sm btn-block mb-5" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
-
+</div>
