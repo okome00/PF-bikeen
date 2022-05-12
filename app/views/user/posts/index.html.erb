@@ -5,14 +5,13 @@
       <div class="card" style="width: 18rem;">
         <%= link_to post_path(post.id) do %>
           <% if post.images.attached? %>
-            <%= image_tag post.images[0], class: "card-img-top" %>
-          <% end %>
-          <% if post.movie.attached? %>
-            <%= video_tag rails_blob_path(post.movie), size: '100*100' %>
+            <% post.images.each do |image| %>
+              <%= image_tag image, class: "card-img-top" %>
+            <% end %>
           <% end %>
           <div class="card-body">
-            <span><i class="fas fa-heart mr-2" style="color: #EF4868;"></i><strong style="color: #000;"><%= post.favorites.count %></strong></span>
-            <span><i class="fas fa-comments ml-3 mr-2" style="color: #000;"></i><strong style="color: #000;"><%= post.post_comments.count %></strong></span>
+            <span><i class="fas fa-heart mr-1" style="color: #EF4868;"></i><strong style="color: #000;"><%= post.favorites.count %></strong></span>
+            <span><i class="fas fa-comments ml-2 mr-1" style="color: #000;"></i><strong style="color: #000;"><%= post.post_comments.count %></strong></span>
           </div>
         <% end %>
       </div>

@@ -1,45 +1,45 @@
 <!-- Signup画面 -->
-<div class="card-list-conteiner py-5 mb-5">
-  <div class="card w-50 mx-auto mt-4 shadow-lg text-center">
-    <h2 class="mt-5 mb-3">Sign up</h2>
+<div class="conteiner p-3">
+  <div class="row no-gutters">
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
+      <h2 class="py-5 mb-0">Sign up</h2>
 
-    <%= form_with model: @user, url: user_registration_path do |f| %>
-      <%= render "user/shared/error_messages", resource: resource %>
+      <div class="field-body p-4">
+        <%= form_with model: @user, url: user_registration_path do |f| %>
+        <%= render "user/shared/error_messages", resource: resource %>
+          <div class="field mb-3">
+            <%= f.email_field :name, placeholder: " Name", autofocus: true, autocomplete: "name" %>
+          </div>
 
-      <div class="field col-6 mx-auto">
-        <%# f.label :name %><br />
-        <%= f.email_field :name, placeholder: " Name", autofocus: true, autocomplete: "name", style: "width: 90%;" %>
+          <div class="field mb-3">
+            <%= f.email_field :email, placeholder: " Email Address", autofocus: true, autocomplete: "email" %>
+          </div>
+
+          <div class="field mb-3">
+            <%# f.label :password %>
+            <% if @minimum_password_length %>
+            <em><%# (@minimum_password_length characters minimum) %></em>
+            <% end %>
+            <%= f.password_field :password, placeholder: " Password", autocomplete: "new-password" %>
+          </div>
+
+          <div class="field mb-3">
+            <%= f.password_field :password_confirmation, placeholder: " Password(re-enter)", autocomplete: "new-password" %>
+          </div>
+
+          <div class="field mb-3">
+            <%= f.submit "Sign up", class: "btn btn-outline-danger btn-sm mt-4", style: "width: 42%;" %>
+          </div>
+        <% end %>
+        
+        <div class="signin-field">
+          <p>──────────　Or　──────────</p>
+          <p>
+            Already have on account?<br />
+            <%= render "user/shared/links" %>
+          </p>
+        </div>
       </div>
-
-      <div class="field col-6 mx-auto">
-        <%# f.label :email %><br />
-        <%= f.email_field :email, placeholder: " Email Address", autofocus: true, autocomplete: "email", style: "width: 90%;" %>
-      </div>
-
-      <div class="field col-6 mx-auto">
-        <%# f.label :password %>
-        <% if @minimum_password_length %>
-        <em><%# (@minimum_password_length characters minimum) %></em>
-        <% end %><br />
-        <%= f.password_field :password, placeholder: "    Password", autocomplete: "new-password", style: "width: 90%;" %>
-      </div>
-
-      <div class="field col-6 mx-auto">
-        <%# f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, placeholder: "    Password(re-enter)", autocomplete: "new-password", style: "width: 90%;" %>
-      </div>
-
-      <div class="action col-3 mx-auto">
-        <%= f.submit "Sign up", class: "btn btn-outline-danger btn-sm btn-block" %>
-      </div>
-    <% end %>
-
-    <div class="signin-field">
-      <p>───────────────　Or　───────────────</p>
-      <p>
-        Already have on account?<br />
-        <%= render "user/shared/links" %>
-      </p>
     </div>
   </div>
 </div>

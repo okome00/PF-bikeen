@@ -46,7 +46,7 @@ class User::PostsController < ApplicationController
   private ## 投稿データストロングパラメータ
 
   def post_params
-    params.require(:post).permit(:content, :hashbody, :spot, :movie, images: [], hashtag_ids: [])
+    params.require(:post).permit(:content, :hashbody, :spot, images: [], hashtag_ids: [])
   end
 
 end

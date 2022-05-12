@@ -8,7 +8,8 @@ class Post < ApplicationRecord
   has_many_attached :images ## ActiveStorage画像投稿
   has_one_attached  :movie  ## ActiveStorage動画投稿
 
-  validates :content, presence: true ## バリデーション設定
+  validates :images,  presence: true ## バリデーション設定
+  validates :content, presence: true 
 
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)

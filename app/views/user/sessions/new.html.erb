@@ -1,44 +1,38 @@
 <!-- Log in画面 -->
-<div class="card-list-conteiner py-5 mb-5">
-  <div class="card w-50 mx-auto mt-4 shadow-lg text-center">
-    <h2 class="mt-5 mb-3">Log in</h2>
+<div class="conteiner p-3">
+  <div class="row no-gutters">
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
+      <h2 class="py-5 mb-0">Log in</h2>
 
-    <%= form_with model: @user, url: user_session_path do |f| %>
-      <div class="field col-6 mx-auto">
-        <%# f.label :email %><br />
-        <%= f.email_field :email, placeholder: " Email Address", autofocus: true, autocomplete: "email", style: "width: 90%;" %>
-      </div>
+      <div class="field-body p-4">
+        <%= form_with model: @user, url: user_session_path do |f| %>
+          <div class="field mb-3">
+            <%= f.email_field :email, placeholder: " Email Address", autofocus: true, autocomplete: "email" %>
+          </div>
 
-      <div class="field col-6 mx-auto">
-        <%# f.label :password %><br />
-        <%= f.password_field :password, placeholder: " Password", autocomplete: "current-password", style: "width: 90%;" %>
-      </div>
+          <div class="field mb-3">
+            <%= f.password_field :password, placeholder: " Password", autocomplete: "current-password" %>
+          </div>
 
-      <% if devise_mapping.rememberable? %>
-        <div class="field">
-          <%# f.check_box :remember_me %>
-          <%# f.label :remember_me %>
+          <div class="field mb-3">
+            <%= f.submit "Log in", class: "btn btn-outline-success btn-sm mt-4", style: "width: 42%;" %>
+          </div>
+        <% end %>
+
+        <div class="signin-field">
+          <p>──────　Or Login with　──────</p>
+          <div class="signin-field-image">
+            <%= image_tag "facebook.png", class: "icon" %>
+            <%= image_tag "instagram.jpeg", class: "icon" %>
+            <%= image_tag "twitter.png", class: "icon" %>
+          </div>
+          <p>
+            New to bikeen? <%= link_to "Sign up now", new_user_registration_path, class: "signup-link" %>
+          </p>
+          <%# render "user/shared/links" %>
         </div>
-      <% end %>
-
-      <div class="action col-3 mx-auto">
-        <%= f.submit "Log in", class: "btn btn-outline-success btn-sm btn-block" %>
       </div>
-    <% end %>
-
-    <div class="signin-field">
-      <p>────────────　Or Login with　────────────</p>
-      <div class="signin-field-image">
-        <%= image_tag "facebook.png", class: "icon" %>
-        <%= image_tag "instagram.jpeg", class: "icon" %>
-        <%= image_tag "twitter.png", class: "icon" %>
-      </div>
-      <p>
-        New to bikeen? <%= link_to "Sign up now", new_user_registration_path, class: "signup-link" %>
-      </p>
-      <%# render "user/shared/links" %>
     </div>
-
   </div>
 </div>
 

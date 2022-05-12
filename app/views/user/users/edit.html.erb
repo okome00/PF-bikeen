@@ -1,43 +1,47 @@
 <!-- 会員情報編集画面 -->
-<div class="card-list-conteiner py-5 mb-5">
-  <div class="card w-50 mx-auto mt-4 shadow-lg text-center">
-    <h3 class="mt-5 mb-3">プロフィール編集</h3>
+<div class="conteiner p-3">
+  <div class="row no-gutters">
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
+      <h3 class="py-5 mb-0">プロフィール編集</h3>
 
-    <%= form_with model: @user, url: user_path do |f| %>
-      <div class="field col-6 mx-auto">
-        <%= image_tag @user.get_profile_image(100, 100), class: "profile-icon mb-5" %><br />
-        <%= f.file_field :profile_image %>
-      </div>
+      <div class="field-body p-4">
+        <%= form_with model: @user, url: user_path do |f| %>
+          <div class="field mb-3">
+            <%= image_tag @user.get_profile_image(100, 100), class: "profile-icon mb-5" %><br />
+            <%= f.file_field :profile_image %>
+          </div>
 
-      <div class="field col-6 mx-auto">
-        <%= f.label :名前 %>
-        <%= f.text_field :name, style: "width: 90%;" %>
-      </div>
+          <div class="field mb-3">
+            <%= f.label :名前 %><br />
+            <%= f.text_field :name, style: "width: 50%;" %>
+          </div>
 
-      <div class="field col-6 mx-auto">
-        <%= f.label :バイク機種 %>
-        <%= f.text_field :bike_model, style: "width: 90%;" %>
-      </div>
+          <div class="field mb-3">
+            <%= f.label :バイク機種 %><br />
+            <%= f.text_field :bike_model, style: "width: 50%;" %>
+          </div>
 
-      <div class="field col-6 mx-auto">
-        <%= f.label :居住地 %>
-        <%= f.text_field :residence, style: "width: 90%;" %>
-      </div>
+          <div class="field mb-3">
+            <%= f.label :居住地 %><br />
+            <%= f.text_field :residence, style: "width: 50%;" %>
+          </div>
 
-      <div class="field col-6 mx-auto">
-        <%= f.label :自己紹介 %>
-        <%= f.text_area :introduction, style: "width: 90%;" %>
-      </div>
+          <div class="field mb-3">
+            <%= f.label :自己紹介 %><br />
+            <%= f.text_area :introduction, style: "width: 50%;" %>
+          </div>
 
-      <div class="field col-6 mx-auto">
-        <%= f.label :メールアドレス %>
-        <%= f.text_field :email, style: "width: 90%;" %>
-      </div>
+          <div class="field mb-3">
+            <%= f.label :メールアドレス %><br />
+            <%= f.text_field :email, style: "width: 50%;" %>
+          </div>
 
-      <div class="action col-3 mx-auto mt-4">
-        <%= f.submit "変更する", class: "btn btn-dark btn-sm btn-block mb-5" %>
+          <div class="field mb-3">
+            <%= f.submit "変更する", class: "btn btn-dark btn-sm mt-4", style: "width: 42%;" %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>
 

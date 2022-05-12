@@ -4,17 +4,16 @@
     <div class="row">
       <div class="col-md-6">
         <% if @post.images.attached? %>
-          <%= image_tag @post.images[0], size: '100*100', class: "card-img-left" %>
-        <% end %>
-        <% if @post.movie.attached? %>
-          <%= video_tag rails_blob_path(@post.movie), size: '300*300' %>
+          <% @post.images.each do |image| %>
+            <%= image_tag image, class: "card-img-left user-post-img" %>
+          <% end %>
         <% end %>
       </div>
 
       <div class="card-body">
         <div class="col-md-7 d-flex">
           <%= link_to user_path(@post.user.id) do %>
-            <%= image_tag @post.user.get_profile_image(50, 70), class: "rounded-circle" %>
+            <%= image_tag @post.user.get_profile_image(50, 50), class: "rounded-circle" %>
             <strong><%= @user.name %><strong>
           <% end %>
         </div>
@@ -23,19 +22,19 @@
         <p class="card-title"><%= @post.content %></p>
         <p class="card-title"><%= render_with_hashtags(@post.hashbody) %></p>
         <p class="card-title"><%= @post.spot %></p>
-        <span><i class="fas fa-calendar"></i><%= l @post.created_at %>　|　</span>
+        <span><i class="fas fa-calendar mr-1"></i><%= l @post.created_at %>　|　</span>
         <span>
           <% if @post.favorited_by?(current_user) %>
-          <%= link_to post_favorites_path(@post), method: :delete do %>
-            <i class="fas fa-heart" style="color: #000;"></i><%= @post.favorites.count %>
+          <%= link_to post_favorites_path(@post), method: :delete, class: "favorite-link" do %>
+            <i class="fas fa-heart mr-1"></i><%= @post.favorites.count %>
           <% end %>
           <% else %>
-            <%= link_to post_favorites_path(@post), method: :post do %>
-              <i class="fas fa-heart" style="color: #000;"></i><%= @post.favorites.count %>
+            <%= link_to post_favorites_path(@post), method: :post, class: "favorite-link" do %>
+              <i class="fas fa-heart mr-1"></i><%= @post.favorites.count %>
             <% end %>
           <% end %>
         </span>
-        <span><i class="fas fa-comments"></i><%= @post.post_comments.count %>　|　</span>
+        <span><i class="fas fa-comments mr-1"></i><%= @post.post_comments.count %>　|　</span>
         <span>
           <% if @post.user == current_user %>
             <%= link_to post_path(@post.id), method: :delete, data: { confirm: "本当に削除しますか?" }, class: "text-dark" do %>
@@ -47,7 +46,7 @@
         <hr>
         <div class="post-comment card-text">
           <% @post.post_comments.each do |post_comment| %>
-            <%= link_to user_path(post_comment.user.id) do %>
+            <%= link_to user_path(post_comment.user.id), class: "profile-icon" do %>
               <%= image_tag post_comment.user.get_profile_image(50, 50) %>
               <%= post_comment.user.name %>
             <% end %>
@@ -63,7 +62,7 @@
         <div class="field">
           <%= form_with model: [@post, @post_comment] do |f| %>
             <%= f.text_area :content, rows: '5', placeholder: "コメントを追加" %>
-            <%= f.submit "コメントを投稿", class: "btn btn-dark btn-sm" %>
+            <%= f.submit "投稿", class: "btn btn-dark btn-sm" %>
           <% end %>
         </div>
       </div>
