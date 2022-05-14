@@ -13,9 +13,10 @@ Rails.application.routes.draw do
       resource  :favorites,     only: [:create, :destroy]               ## Favoriteルーディング
     end
     resources :users, only: [:show, :edit, :update] do                  ## Userルーディング
-      resource :relationships, only: [:create, :destroy]                ## Relationshipモデルルーディング
+      resource :relationships, only: [:create, :destroy]                ## Relationshipルーディング
       get 'followings' => 'relationships#followings', as: 'followings'  ## フォロー一覧ルーディング
       get 'followers'  => 'relationships#followers',  as: 'followers'   ## フォロワー一覧ルーディング
     end
+    resources :notifications, only: [:index]                            ## Notificationルーディング
   end
 end

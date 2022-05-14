@@ -3,6 +3,7 @@ class User::FavoritesController < ApplicationController
 
   def create ## いいね！投稿アクション
     post = Post.find(params[:post_id])
+    post.create_notification_favorite!(current_user)
     favorite = current_user.favorites.new(post_id: post.id)
     favorite.save
     redirect_to post_path(post)

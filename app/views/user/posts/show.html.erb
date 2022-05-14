@@ -4,25 +4,38 @@
     <div class="row">
       <div class="col-md-6">
         <% if @post.images.attached? %>
-          <% @post.images.each do |image| %>
-            <%= image_tag image, class: "card-img-left user-post-img" %>
+          <% if @post.images.length < 2 %>
+            <% @post.images.each do |image| %>
+              <%= image_tag image, class: "card-img-left user-post-img" %>
+            <% end %>
+          <% else %>
+            <div class="swiper">
+              <div class="swiper-wrapper">
+                <% @post.images.each do |image| %>
+                  <%= image_tag image, class: "card-img-left swiper-slide user-post-img" %>
+                <% end %>
+              </div>
+              <div class="swiper-button-prev swiper-button-white"></div>
+              <div class="swiper-button-next swiper-button-white"></div>
+              <div class="swiper-pagination"></div>
+            </div>
           <% end %>
         <% end %>
       </div>
 
       <div class="card-body">
-        <div class="col-md-7 d-flex">
+        <div class="col-md-7 d-flex ml-2">
           <%= link_to user_path(@post.user.id) do %>
-            <%= image_tag @post.user.get_profile_image(50, 50), class: "rounded-circle" %>
-            <strong><%= @user.name %><strong>
+            <%= image_tag @post.user.get_profile_image(50, 50), class: "rounded-circle mr-2" %>
+            <strong class="text-dark"><%= @user.name %></strong>
           <% end %>
         </div>
 
         <hr>
-        <p class="card-title"><%= @post.content %></p>
-        <p class="card-title"><%= render_with_hashtags(@post.hashbody) %></p>
-        <p class="card-title"><%= @post.spot %></p>
-        <span><i class="fas fa-calendar mr-1"></i><%= l @post.created_at %>　|　</span>
+        <p class="card-title ml-4"><%= @post.content %></p>
+        <p class="card-title ml-4"><%= render_with_hashtags(@post.hashbody) %></p>
+        <p class="card-title ml-4"><%= @post.spot %></p>
+        <span><i class="fas fa-calendar ml-4 mr-1"></i><%= l @post.created_at %>　|　</span>
         <span>
           <% if @post.favorited_by?(current_user) %>
           <%= link_to post_favorites_path(@post), method: :delete, class: "favorite-link" do %>
@@ -46,23 +59,25 @@
         <hr>
         <div class="post-comment card-text">
           <% @post.post_comments.each do |post_comment| %>
-            <%= link_to user_path(post_comment.user.id), class: "profile-icon" do %>
-              <%= image_tag post_comment.user.get_profile_image(50, 50) %>
-              <%= post_comment.user.name %>
+            <%= link_to user_path(post_comment.user.id) do %>
+              <%= image_tag post_comment.user.get_profile_image(50, 50), class: "rounded-circle ml-4 mr-2" %>
+              <strong class="text-dark mr-3"><%= post_comment.user.name %></strong>
             <% end %>
-            <%= l post_comment.created_at %>
-            <%= post_comment.content %>
+            <i class="fas fa-calendar mr-1"></i><%= l post_comment.created_at %>
             <% if post_comment.user == current_user %>
-              <%= link_to "コメントを削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
+              <%= link_to post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "text-danger" do %>
+                <i class="fas fa-trash-can ml-3"></i>
+              <% end %>
             <% end %>
+            <p class="mt-2 ml-4"><%= post_comment.content %></p>
           <% end %>
         </div>
 
         <hr>
-        <div class="field">
+        <div class="comment-field">
           <%= form_with model: [@post, @post_comment] do |f| %>
-            <%= f.text_area :content, rows: '5', placeholder: "コメントを追加" %>
-            <%= f.submit "投稿", class: "btn btn-dark btn-sm" %>
+            <%= f.text_area :content, rows: '2', placeholder: " コメントを追加", style: "width: 50%;" %>
+            <%= f.submit "投稿", class: "btn btn-dark btn-sm mb-4" %>
           <% end %>
         </div>
       </div>
