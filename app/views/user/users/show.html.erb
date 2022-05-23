@@ -1,57 +1,81 @@
 <!-- マイページ画面 -->
-<div class="conteiner profile-wrap">
-  <div class="row">
-    <div class="col-md-5 text-center">
+<div class="profile-wrap">
+  <header class="profile-top">
+    <div class="profile-img">
       <%= image_tag @user.get_profile_image(100, 100), class: "profile-icon" %>
     </div>
-    <div class="col-md-7">
-      <div class="d-flex mb-3">
-        <h5 class="mr-4"><%= @user.name %></h5>
-        <% if @user == current_user %>
-          <%= link_to "プロフィールを編集", edit_user_path, class: "btn btn-outline-dark btn-sm font-weight-bold" %><br />
-        <% end %>
-      </div>
+    <section class="profile-name">
+      <h5 class="mr-4"><%= @user.name %></h5>
+      <% if @user == current_user %>
+        <%= link_to "プロフィールを編集", edit_user_path, class: "btn btn-outline-dark btn-sm font-weight-bold" %><br />
+      <% end %>
       <% if @user != current_user %>
         <% if current_user.following?(@user) %>
-          <%= link_to "フォローを外す", user_relationships_path(@user.id), method: :delete, class: "btn btn-primary btn-sm" %>
+          <%= link_to "フォローを外す", user_relationships_path(@user.id), method: :delete, class: "btn btn-outline-primary btn-sm font-weight-bold" %>
         <% else %>
-          <%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class: "btn btn-outline-primary btn-sm" %>
+          <%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class: "btn btn-primary btn-sm font-weight-bold" %>
         <% end %>
       <% end %>
-      <div class="follow-field mb-3">
-        投稿<strong><%= @posts.count %></strong>件
-        <%= link_to user_followers_path(@user), class: "follower-link mr-3 ml-3" do %>
-          フォロワー
-          <strong><%= @user.followers.count %></strong>人
-        <% end %>
-        <%= link_to user_followings_path(@user), class: "follow-link" do %>
-          フォロー
-          <strong><%= @user.followings.count %></strong>人
-        <% end %>
-      </div>
-      <div class="profile-item">
-        <p><%= @user.introduction %></p>
-        バイク機種：<%= @user.bike_model %>
-        居住地：<%= @user.residence %>
-      </div>
-    </div>
+      <p class="mt-2"><%= @user.introduction %></p>
+      バイク機種：<%= @user.bike_model %>
+      居住地：<%= @user.residence %>
+    </section>
+  </header>
+  <hr>
 
-    <div class="col-md-12 mt-5 my-post"></div>
+  <ul class="profile-status">
+    <li class="profile-status-list">
+      投稿<strong><%= @posts.count %></strong>件
+    </li>
+    <li class="profile-status-list">
+      <%= link_to user_followers_path(@user), class: "follower-link mr-3 ml-3" do %>
+        フォロワー
+        <strong><%= @user.followers.count %></strong>人
+      <% end %>
+    </li>
+    <li class="profile-status-list">
+      <%= link_to user_followings_path(@user), class: "follow-link" do %>
+        フォロー中
+        <strong><%= @user.followings.count %></strong>人
+      <% end %>
+    </li>
+  </ul>
+  <hr>
 
-    <div class="row">
+  <div class="profile-post">
+    <% if @posts.exists? %>
       <% @posts.each do |post| %>
-        <div class="post-item">
+        <div class="post-item-block">
           <%= link_to post_path(post.id) do %>
             <% if post.images.attached? %>
-              <%= image_tag post.images[0] %><br />
-            <% end %>
-            <% if post.movie.attached? %>
-              <%= image_tag post.movie %><br />
+              <% if post.images.length < 2 %>
+                <% post.images.each do |image| %>
+                  <div class="post-item">
+                    <div class="post-item-img">
+                      <%= image_tag image %>
+                    </div>
+                  </div>
+                <% end %>
+              <% else %>
+                <% post.images.each do |image| %>
+                  <div class="post-item">
+                    <div class="post-item-img">
+                      <%= image_tag image %>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
             <% end %>
           <% end %>
         </div>
       <% end %>
-    </div>
+    <% else %>
+      <div class="profile-post-none">
+        <div class="post-none">
+          <h2 class="post-none-text font-weight-bold">画像や動画を投稿してみんなと共有しましょう！</h2>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 

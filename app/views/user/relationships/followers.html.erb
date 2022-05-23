@@ -1,14 +1,30 @@
 <!-- フォロワー一覧画面 -->
-<h1>フォロワー一覧</h1>
-
-<% if @users.exists? %>
-  <% @users.each do |user| %>
-    <%= link_to user_path(user.id) do %>
-      <%= image_tag user.get_profile_image(100, 100) %>
-      <%= user.name %><br>
-      <%= user.introduction %>
+<div class="followers-wrap">
+  <h4 class="followers-title">フォロワー一覧</h4>
+  <% if @users.exists? %>
+    <% @users.each do |user| %>
+      <div class="followers-content">
+        <div class="followers-list">
+          <div class="followers-list-img">
+            <%= link_to user_path(user.id) do %>
+              <%= image_tag user.get_profile_image(50, 50), class: "rounded-circle" %>
+            <% end %>
+          </div>
+          <div class="followers-list-name">
+            <strong class="text-dark"><%= user.name %></strong><br />
+            <%= user.introduction %>
+          </div>
+          <% if current_user.following?(user) %>
+            <%= link_to "フォローを外す", user_relationships_path(user.id), method: :delete, class: "btn btn-outline-primary font-weight-bold btn-sm" %>
+          <% else %>
+            <%= link_to "フォローする", user_relationships_path(user.id), method: :post, class: "btn btn-primary font-weight-bold btn-sm" %>
+          <% end %>
+        </div>
+      </div>
     <% end %>
+  <% else %>
+    <div class="followers-none">
+      <h2 class="followers-none-text font-weight-bold">ユーザーはいません</p>
+    </div>
   <% end %>
-<% else %>
-  <p>ユーザーはいません</p>
-<% end %>
+</div>

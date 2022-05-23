@@ -1,0 +1,10 @@
+<!-- いいね！機能部分テンプレ -->
+<% if post.favorited_by?(current_user) %>
+<%= link_to post_favorites_path(post), method: :delete, remote: true, class: "favorite-link" do %>
+  <i class="fas fa-heart mr-1"></i><%= post.favorites.count %>
+<% end %>
+<% else %>
+  <%= link_to post_favorites_path(post), method: :post, remote: true, class: "favorite-link" do %>
+    <i class="fas fa-heart mr-1"></i><%= post.favorites.count %>
+  <% end %>
+<% end %>

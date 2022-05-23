@@ -64,18 +64,14 @@ ActiveRecord::Schema.define(version: 2022_05_14_105308) do
   end
 
   create_table "notfications", force: :cascade do |t|
-    t.integer "visitor_id", null: false
-    t.integer "visited_id", null: false
+    t.integer "visitor_id"
+    t.integer "visited_id"
     t.integer "post_id"
     t.integer "post_comment_id"
-    t.string "action", default: "", null: false
+    t.string "action"
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_comment_id"], name: "index_notfications_on_post_comment_id"
-    t.index ["post_id"], name: "index_notfications_on_post_id"
-    t.index ["visited_id"], name: "index_notfications_on_visited_id"
-    t.index ["visitor_id"], name: "index_notfications_on_visitor_id"
   end
 
   create_table "post_comments", force: :cascade do |t|

@@ -1,0 +1,15 @@
+<!-- 検索結果表示画面 -->
+<h3>検索結果 "<%= @keyword %>"</h3>
+<ul>
+  <% @posts.each do |post| %>
+    <li>
+      <%= link_to post_path(post.id) do %>
+        <% if post.images.attached? %>
+          <% post.images.each do |image| %>
+            <%= image_tag image %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

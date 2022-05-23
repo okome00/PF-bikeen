@@ -14,6 +14,12 @@
       <ul class="navbar-nav ml-auto">
         <% if user_signed_in? %> <!-- Loginヘッダー -->
           <li class="nav-item">
+            <%= form_with url: search_posts_path, local: true, method: :get do |f| %>
+              <%= f.text_field :keyword %>
+              <%= f.submit "検索" %>
+            <% end %>
+          </li>
+          <li class="nav-item">
             <%= link_to posts_path, class: "nav-link text-dark" do %>
               <i class="fas fa-house"></i> Home
             <% end %>
@@ -24,8 +30,12 @@
             <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to root_path, class: "nav-link text-dark" do %>
-              <i class="fas fa-bell"></i> Noice
+            <%= link_to notifications_path, class: "nav-link text-dark" do %>
+              <%# if unchecked_notifications.any? %>
+                <%#i class="fas fa-bell" style="color: gold;"></i> Noice
+              <%# else %>
+                <i class="fas fa-bell"></i> Noice
+              <%# end %>
             <% end %>
           </li>
           <li class="nav-item">

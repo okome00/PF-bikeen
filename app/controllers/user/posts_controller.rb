@@ -32,7 +32,7 @@ class User::PostsController < ApplicationController
     redirect_to posts_path
   end
 
-  def hashtag
+  def hashtag ## ハッシュタグアクション
     @user = current_user
     if params[:name].nil?
       @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.posts.count}
@@ -40,6 +40,15 @@ class User::PostsController < ApplicationController
       @hashtag = Hashtag.find_by(hashname: params[:name])
       @posts = @hashtag.posts
       @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.posts.count}
+    end
+  end
+
+  def search ## 投稿検索アクション
+    if params[:keyword].present?
+      @posts = Post.where('content LIKE ?', "%#{params[:keyword]}%")
+      @keyword = params[:keyword]
+    else
+      @posts = Post.all
     end
   end
 

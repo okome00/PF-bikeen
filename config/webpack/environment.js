@@ -2,7 +2,7 @@ const { environment } = require('@rails/webpacker')
 
 module.exports = environment
 
-// Bootstrap導入 //
+// jQueryを管理下として設定
 const webpack = require('webpack')
 environment.plugins.prepend(
   'Provide',

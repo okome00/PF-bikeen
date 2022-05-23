@@ -15,21 +15,23 @@
   </head>
 
   <body>
-    <header class="shadow-sm"> <!-- ヘッダー部分テンプレ -->
-      <%= render 'layouts/header' %>
-    </header>
+    <div class="footer-fixed">
+      <header class="shadow-sm"> <!-- ヘッダー部分テンプレ -->
+        <%= render 'layouts/header' %>
+      </header>
 
-    <p id="notice">
-      <%# notice %>
-    </p>
+      <p id="notice">
+        <%# notice %>
+      </p>
 
-    <main class="mb-auto"> <!-- メイン画面 -->
-      <%= yield %>
-    </main>
+      <main class="mb-auto"> <!-- メイン画面 -->
+        <%= yield %>
+      </main>
 
-    <footer class="bg-dark text-white pt-5 pb-4"> <!-- フッター部分テンプレ -->
-      <%= render 'layouts/footer' %>
-    </footer>
+      <footer> <!-- フッター部分テンプレ -->
+        <%= render 'layouts/footer' %>
+      </footer>
+    </div>
 
   </body>
 </html>
