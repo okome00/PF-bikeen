@@ -8,10 +8,12 @@
 
     <!-- CSS読み込み -->
     <!-- Bootstrap読み込み -->
-    <!-- CDN読み込み-->
+    <!-- slick/CDN読み込み-->
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   </head>
 
   <body>
@@ -19,10 +21,6 @@
       <header class="shadow-sm"> <!-- ヘッダー部分テンプレ -->
         <%= render 'layouts/header' %>
       </header>
-
-      <p id="notice">
-        <%# notice %>
-      </p>
 
       <main class="mb-auto"> <!-- メイン画面 -->
         <%= yield %>

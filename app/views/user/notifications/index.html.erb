@@ -1,16 +1,13 @@
 <!-- 通知一覧画面 -->
-<h3 class="text-center">通知一覧</h3>
-  <%= link_to notifications_destroy_all_path, method: :delete do %>
-    <i class="fas fa-trash-can" style="color: #000;"></i>
-    <span>全削除</span>
+<div class="notification-wrap">
+  <h4 class="notification-title">通知一覧</h4>
+  <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
+
+  <% if notifications.exists? %>
+    <%= render notifications %>
+    <%= paginate notifications %>
+  <% else %>
+    <div class="notification-none">
+      <h4 class="notification-none-text font-weight-bold">通知はありません</h4>
   <% end %>
-
-<hr>
-
-<% if @notifications.exists? %>
-  <div class="notification-index">
-    <%= render @notifications %>
-  </div>
-<% else %>
-  <p>通知はありません</p>
-<% end %>
+</div>

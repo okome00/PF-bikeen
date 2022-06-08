@@ -1,20 +1,22 @@
 <!-- 投稿一覧画面 -->
 <div class="post-wrap">
-  <div class="post-content d-flex">
+  <div class="post-content">
     <% @posts.each do |post| %>
-      <div class="card" style="width: 18rem;">
-        <%= link_to post_path(post.id) do %>
-          <% if post.images.attached? %>
-            <% post.images.each do |image| %>
-              <%= image_tag image, class: "card-img-top" %>
-            <% end %>
+      <%= link_to post_path(post.id) do %>
+        <% if post.images.attached? %>
+          <% if post.images.length < 2 %>
+            <%= image_tag post.images[0], size: '100*100' %>
+          <% else %>
+            <div class="images-box">
+              <%= image_tag post.images[0], size: '100*100' %>
+              <div class="images">
+                <i class="fas fa-images text-secondary images-icon"></i>
+              </div>
+            </div>
           <% end %>
-          <div class="card-body">
-            <span><i class="fas fa-heart mr-1" style="color: #EF4868;"></i><strong style="color: #000;"><%= post.favorites.count %></strong></span>
-            <span><i class="fas fa-comments ml-2 mr-1" style="color: #000;"></i><strong style="color: #000;"><%= post.post_comments.count %></strong></span>
-          </div>
         <% end %>
-      </div>
+      <% end %>
     <% end %>
+    <%= paginate @posts %>
   </div>
 </div>

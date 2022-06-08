@@ -16,6 +16,8 @@
 
  /* swiper読み込み */
 @import 'swiper/swiper-bundle';
+@import "slick-theme";
+@import "slick";
 
 /* 共通 */
 * {
@@ -29,6 +31,20 @@ a:hover {
   text-decoration: none;
 }
 
+.header-name {
+  font-family: fantasy;
+  font-size: 25px;
+}
+
+.search-item {
+  padding-top: 7px;
+  padding-right: 50px;
+}
+
+.footer-name {
+  font-family: fantasy;
+}
+
 .footer-fixed {
   min-height: 100vh;
   display: flex;
@@ -37,8 +53,8 @@ a:hover {
 
 footer {
   margin-top: auto;
-  background-color: #faf0e6;
-  color: #c0c0c0;
+  background-color: #ffd700;
+  color: #000;
   text-align: center;
   width: 100%;
   height: 100px
@@ -46,6 +62,43 @@ footer {
 
 ul {
   list-style: none;
+}
+
+.n-circle {
+  padding-right: 8px;
+  padding-bottom: 5px;
+  font-size: 10px;
+}
+
+/* top画面 */
+.top-image {
+  width: 100%;
+  height: 1000px;
+  background-image: url("biker-man.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.top-image-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30%;
+  height: 1000px;
+  background-color: rgba(0,0,0,0.5);
+  text-align: center;
+  padding-top: 400px;
+}
+
+.top-image-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.top-image-post {
+  margin-top: 10px;
 }
 
 /* Signup/in画面 */
@@ -72,6 +125,8 @@ ul {
 
 .signup-link {
   margin-left: 10px;
+  font-weight: bold;
+  color: #000;
 }
 
 /* プロフィール画面 */
@@ -121,13 +176,16 @@ ul {
 }
 
 .profile-post {
-  flex-direction: column;
   padding-bottom: 50px;
+  padding-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .post-item-block {
-  flex-direction: row;
+  justify-content: center;
   display: flex;
+  margin: 5px;
 }
 
 .post-item {
@@ -138,9 +196,9 @@ ul {
   padding-bottom: 10px;
 }
 
-.post-item-img {
-  width: 100%;
-  height: 100%;
+.post-item img {
+  width: 300px;
+  height: 300px;
 }
 
 .profile-post-none {
@@ -176,48 +234,166 @@ ul {
 }
 
 /* 投稿詳細画面 */
-.user-post-img {
-  width: 580px;
-  height: 530px;
+.post-name {
+  border-bottom: 1px solid #d3d3d3;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.post-content-show {
+  border-bottom: 1px solid #d3d3d3;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.post-comment {
+  border-bottom: 1px solid #d3d3d3;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .comment-field {
   margin-left: 20px;
 }
 
-/* フォロワー一覧画面 */
-.followers-wrap {
-  margin: 0 auto;
-  max-width: 500px;
-  width: 100%;
-  padding-top: 10px;
+/*.user-post-img {
+  height: 600px;
+}*/
+
+
+/* 投稿一覧画面 */
+.post-wrap {
+  margin: 50px 150px;
 }
 
-.followers-title {
+.post-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.post-content img {
+  width: 300px;
+  height: 300px;
+  margin: 15px;
+}
+
+.images-box {
+  position: relative;
+}
+
+.images {
+  position: absolute;
+  top: 7%;
+  right: 7%;
+}
+
+.images-icon {
+  width: 30px;
+  height: 30px;
+}
+
+/* 検索結果画面 */
+.search-wrap {
+  margin: 50px 150px;
+}
+
+.search-post {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.search-post img {
+  width: 300px;
+  height: 300px;
+  margin: 15px;
+}
+
+/* ハッシュタグ一覧画面 */
+.hashtag-wrap {
+  margin: 50px 150px;
+}
+
+.hashtag-post {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hashtag-post img {
+  width: 300px;
+  height: 300px;
+  margin: 15px;
+}
+
+.hashtag-name {
+  margin-top: 50px;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* フォロワー一覧画面 */
+.follow-wrap {
+  margin: 0 auto;
+  max-width: 400px;
+  width: 100%;
+  padding-top: 50px;
+}
+
+.follow-title {
   display: block;
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
 }
 
-.followers-content {
-  margin-top: 16px;
+.follow-content {
+  margin-top: 20px;
   border: 1px solid #dbdbdb;
 }
 
-.followers-list {
+.follow-list {
   padding: 8px 16px;
   align-items: center;
   display: flex;
-  width: 100%:
+  width: 100%;
 }
 
-.followers-list-img {
+.follow-list-img {
   margin-right: 12px;
   justify-content: center;
 }
 
-.followers-list-name {
+/* 通知一覧画面 */
+.notification-wrap {
+  margin: 0 auto;
+  max-width: 550px;
+  width: 100%;
+  padding-top: 50px;
 }
 
+.notification-title {
+  display: block;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+}
 
+.notification-content {
+  margin-top: 20px;
+  border: 1px solid #dbdbdb;
+}
+
+.notification-list {
+  padding: 8px 16px;
+  align-items: center;
+  display: flex;
+  width: 100%;
+}
+
+.notification-list-img {
+  margin-right: 12px;
+  justify-content: center;
+}

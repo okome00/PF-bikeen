@@ -17,7 +17,7 @@ class User::PostsController < ApplicationController
   end
 
   def index ## 投稿一覧表示アクション
-    @posts = Post.all
+    @posts = Post.all.page(params[:page]).per(10)
   end
 
   def show ## 投稿詳細表示アクション

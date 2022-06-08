@@ -20,8 +20,12 @@ import "skippr.min";
 import "script.js";
 
 //= require jquery
-//= require rails-ujs
+//= require jquery_ujs
+
+require('jquery')
+require('slick')
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+

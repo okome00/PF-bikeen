@@ -2,7 +2,7 @@
 <div class="conteiner p-3">
   <div class="row no-gutters">
     <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
-      <h2 class="py-5 mb-0">Sign up</h2>
+      <h2 class="py-5 mb-0" style="font-family: fantasy;">Sign up</h2>
 
       <div class="field-body p-4">
         <%= form_with model: @user, url: user_registration_path do |f| %>
@@ -28,7 +28,7 @@
           </div>
 
           <div class="field mb-3">
-            <%= f.submit "Sign up", class: "btn btn-outline-danger btn-sm mt-4" %>
+            <%= f.submit "Sign up", class: "btn btn-outline-warning btn-sm mt-4" %>
           </div>
         <% end %>
 
@@ -36,7 +36,8 @@
           <p>──────────　Or　──────────</p>
           <p>
             Already have on account?<br />
-            <%= render "user/shared/links" %>
+            <%= link_to "Log in", new_user_session_path, class: "signup-link" %>
+            <%# render "user/shared/links", class: "font-weight-bold" %>
           </p>
         </div>
       </div>

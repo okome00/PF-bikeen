@@ -59,4 +59,4 @@ gem 'devise' ## ログイン機能
 
 gem 'kaminari','~> 1.2.1' ## ページネーション
 
-gem 'jquery-rails' ## jQuery
+gem 'jquery-rails' ## jQuery導入

@@ -5,7 +5,7 @@
       <%= image_tag @user.get_profile_image(100, 100), class: "profile-icon" %>
     </div>
     <section class="profile-name">
-      <h5 class="mr-4"><%= @user.name %></h5>
+      <h5 class="mr-4 font-weight-bold"><%= @user.name %></h5>
       <% if @user == current_user %>
         <%= link_to "プロフィールを編集", edit_user_path, class: "btn btn-outline-dark btn-sm font-weight-bold" %><br />
       <% end %>
@@ -49,24 +49,26 @@
           <%= link_to post_path(post.id) do %>
             <% if post.images.attached? %>
               <% if post.images.length < 2 %>
-                <% post.images.each do |image| %>
-                  <div class="post-item">
-                    <div class="post-item-img">
-                      <%= image_tag image %>
-                    </div>
+                <div class="post-item">
+                  <div class="post-item-img">
+                    <%= image_tag post.images[0], size: '100*100' %>
                   </div>
-                <% end %>
+                </div>
               <% else %>
-                <% post.images.each do |image| %>
-                  <div class="post-item">
-                    <div class="post-item-img">
-                      <%= image_tag image %>
+                <div class="post-item">
+                  <div class="post-item-img">
+                    <div class="images-box">
+                      <%= image_tag post.images[0], size: '100*100' %>
+                      <div class="images">
+                        <i class="fas fa-images text-secondary images-icon"></i>
+                      </div>
                     </div>
                   </div>
-                <% end %>
+                </div>
               <% end %>
             <% end %>
           <% end %>
+          <%= paginate @posts %>
         </div>
       <% end %>
     <% else %>

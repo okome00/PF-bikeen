@@ -2,9 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <span>
-        <i class="fas fa-motorcycle"></i> bikeen
-      </span>
+      <span class="header-name ml-5">bikeen</span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                   aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,10 +11,10 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav ml-auto">
         <% if user_signed_in? %> <!-- Loginヘッダー -->
-          <li class="nav-item">
+          <li class="search-item">
             <%= form_with url: search_posts_path, local: true, method: :get do |f| %>
               <%= f.text_field :keyword %>
-              <%= f.submit "検索" %>
+              <%= f.submit "🔍" %>
             <% end %>
           </li>
           <li class="nav-item">
@@ -31,11 +29,11 @@
           </li>
           <li class="nav-item">
             <%= link_to notifications_path, class: "nav-link text-dark" do %>
-              <%# if unchecked_notifications.any? %>
-                <%#i class="fas fa-bell" style="color: gold;"></i> Noice
-              <%# else %>
+              <% if unchecked_notifications.any? %>
+                <i class="fas fa-bell"></i> Noice<i class="fas fa-circle n-circle" style="color: gold;"></i>
+              <% else %>
                 <i class="fas fa-bell"></i> Noice
-              <%# end %>
+              <% end %>
             <% end %>
           </li>
           <li class="nav-item">

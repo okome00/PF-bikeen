@@ -1,75 +1,66 @@
 <!-- 投稿詳細画面 -->
-<div class="post-content py-5">
+<div class="card-list-container py-5">
   <div class="card w-75 mx-auto mt-4 mb-4 shadow-lg">
-    <div class="row">
-      <div class="col-md-6">
-        <% if @post.images.attached? %>
-          <% if @post.images.length < 2 %>
-            <% @post.images.each do |image| %>
-              <%= image_tag image, class: "card-img-left user-post-img" %>
-            <% end %>
-          <% else %>
-            <div class="swiper-container">
-              <div class="swiper-wrapper">
-                <% @post.images.each do |image| %>
-                  <%= image_tag image, class: "card-img-left swiper-slide user-post-img" %>
-                <% end %>
-              </div>
-              <div class="swiper-pagination"></div>
-              <div class="swiper-button-prev"></div>
-              <div class="swiper-button-next"></div>
-              <div class="swiper-scrollbar"></div>
-            </div>
-          <% end %>
+    <% if @post.images.attached? %>
+      <% if @post.images.length < 2 %>
+        <% @post.images.each do |image| %>
+          <%= image_tag image, class: "card-img-top user-post-img" %>
         <% end %>
-      </div>
+      <% else %>
+        <div class="slider">
+          <% @post.images.each do |image| %>
+            <%= image_tag image, class: "card-img-top user-post-img slick_image" %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
 
-      <div class="card-body">
-        <div class="col-md-7 d-flex ml-2">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12 d-flex ml-2 post-name">
           <%= link_to user_path(@post.user.id) do %>
             <%= image_tag @post.user.get_profile_image(50, 50), class: "rounded-circle mr-2" %>
             <strong class="text-dark"><%= @user.name %></strong>
           <% end %>
         </div>
 
-        <hr>
-        <p class="card-title ml-4"><%= @post.content %></p>
-        <p class="card-title ml-4"><%= render_with_hashtags(@post.hashbody) %></p>
-        <p class="card-title ml-4"><%= @post.spot %></p>
-        <span><i class="fas fa-calendar ml-4 mr-1"></i><%= l @post.created_at %>　|　</span>
-        <span id="favorite_buttons_<%= @post.id %>">
-          <%= render 'user/favorites/favorite', post: @post %>
-        </span>
-        <span><i class="fas fa-comments mr-1"></i><%= @post.post_comments.count %>　|　</span>
-        <span>
-          <% if @post.user == current_user %>
-            <%= link_to post_path(@post.id), method: :delete, data: { confirm: "本当に削除しますか?" }, class: "text-dark" do %>
-              <i class="fas fa-trash-can"></i>
-            <% end %>
-          <% end %>
-        </span>
-
-        <hr>
-        <div class="post-comment card-text">
-          <% @post.post_comments.each do |post_comment| %>
-            <%= link_to user_path(post_comment.user.id) do %>
-              <%= image_tag post_comment.user.get_profile_image(50, 50), class: "rounded-circle ml-4 mr-2" %>
-              <strong class="text-dark mr-3"><%= post_comment.user.name %></strong>
-            <% end %>
-            <i class="fas fa-calendar mr-1"></i><%= l post_comment.created_at %>
-            <% if post_comment.user == current_user %>
-              <%= link_to post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "text-danger" do %>
-                <i class="fas fa-trash-can ml-3"></i>
+        <div class="post-content-show col-md-12">
+          <p class="ml-2"><%= @post.content %></p>
+          <p class="ml-2"><%= render_with_hashtags(@post.hashbody) %></p>
+          <p class="ml-2"><%= @post.spot %></p>
+          <span><i class="fas fa-calendar ml-2 mr-1"></i><%= l @post.created_at %>　|　</span>
+          <span class="favorites_buttons_<%= @post.id %>">
+            <%= render 'user/favorites/favorite', post: @post %>
+          </span>
+          <span><i class="fas fa-comments mr-1"></i><%= @post.post_comments.count %>　|　</span>
+          <span>
+            <% if @post.user == current_user %>
+              <%= link_to post_path(@post.id), method: :delete, data: { confirm: "本当に削除しますか?" }, class: "text-dark" do %>
+                <i class="fas fa-trash-can" style="color: red;"></i>
               <% end %>
             <% end %>
-            <p class="mt-2 ml-4"><%= post_comment.content %></p>
+          </span>
+        </div>
+
+        <div class="post-comment col-md-12">
+          <% @post.post_comments.each do |post_comment| %>
+            <%= link_to user_path(post_comment.user.id) do %>
+              <%= image_tag post_comment.user.get_profile_image(50, 50), class: "rounded-circle ml-2 mr-2" %>
+              <strong class="text-dark mr-3"><%= post_comment.user.name %></strong>
+            <% end %>
+            <span style="color: #808080;"><%= time_ago_in_words(post_comment.created_at) %>前</span>
+            <% if post_comment.user == current_user %>
+              <%= link_to post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "text-danger" do %>
+                <i class="fas fa-trash-can ml-3" style="color: red;"></i>
+              <% end %>
+            <% end %>
+            <p class="mt-2 ml-2"><%= post_comment.content %></p>
           <% end %>
         </div>
 
-        <hr>
         <div class="comment-field">
           <%= form_with model: [@post, @post_comment] do |f| %>
-            <%= f.text_area :content, rows: '2', placeholder: " コメントを追加", style: "width: 50%;" %>
+            <%= f.text_area :content, rows: '2', cols: '60', placeholder: " コメントを追加", style: "width: 50%;" %>
             <%= f.submit "投稿", class: "btn btn-dark btn-sm mb-4" %>
           <% end %>
         </div>

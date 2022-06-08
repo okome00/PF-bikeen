@@ -1,29 +1,28 @@
 <!-- ハッシュタグ一覧 -->
-<% if params[:name] == nil %>
-
-<% else %>
-  <h1>ハッシュタグ #<%= @hashtag.hashname %>: <%= @posts.count %></h1>
-
-  <% @posts.each do |post| %>
-    <%= link_to user_path(post.user) do %>
-      <%= image_tag post.user.get_profile_image(50, 50) %>
-      <%= post.user.name %><br />
-    <% end %>
-    <%= link_to post_path(post.id) do %>
-      <% if post.images.attached? %>
-        <%= image_tag post.images[0], size: '100*100' %><br />
+<div class="hashtag-wrap">
+  <% if params[:name] == nil %>
+  <% else %>
+    <h4 class="hashtag-title font-weight-bold">#<%= @hashtag.hashname %>: <%= @posts.count %>件</h4>
+    <ul class="hashtag-post">
+      <% @posts.each do |post| %>
+        <li>
+          <%= link_to post_path(post.id) do %>
+            <% if post.images.attached? %>
+              <%= image_tag post.images[0], size: '100*100' %><br />
+            <% end %>
+          <% end %>
+        </li>
       <% end %>
-      コメント: <%= post.post_comments.count %><br />
-      いいね！: <%= post.favorites.count %><br />
-      <%= l post.created_at %>
-    <% end %>
+    </ul>
   <% end %>
-<% end %>
 
-<% @hashtags.sort.reverse.each do |count| %>
-  <% count[1].each do |hashtag| %>
-    <p>
-      <%= link_to "##{hashtag.hashname} (#{hashtag.posts.count}) 件", "/post/hashtag/#{hashtag.hashname}", data: {"turbolinks" => false }%>
-    </p>
-  <% end %>
-<% end %>
+  <div class="hashtag-name">
+    <% @hashtags.sort.reverse.each do |count| %>
+      <% count[1].each do |hashtag| %>
+        <span class="mr-2">
+          <%= link_to "##{hashtag.hashname} (#{hashtag.posts.count}) 件", "/post/hashtag/#{hashtag.hashname}", data: {"turbolinks" => false }, class: "text-dark" %>
+        </span>
+      <% end %>
+    <% end %>
+  </div>
+</div>
