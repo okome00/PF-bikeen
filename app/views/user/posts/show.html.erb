@@ -19,7 +19,7 @@
       <div class="row">
         <div class="col-md-12 d-flex ml-2 post-name">
           <%= link_to user_path(@post.user.id) do %>
-            <%= image_tag @post.user.get_profile_image(50, 50), class: "rounded-circle mr-2" %>
+            <%= image_tag @post.user.get_profile_image(70, 70), class: "rounded-circle mr-2" %>
             <strong class="text-dark"><%= @user.name %></strong>
           <% end %>
         </div>
@@ -45,7 +45,7 @@
         <div class="post-comment col-md-12">
           <% @post.post_comments.each do |post_comment| %>
             <%= link_to user_path(post_comment.user.id) do %>
-              <%= image_tag post_comment.user.get_profile_image(50, 50), class: "rounded-circle ml-2 mr-2" %>
+              <%= image_tag post_comment.user.get_profile_image(70, 70), class: "rounded-circle ml-2 mr-2" %>
               <strong class="text-dark mr-3"><%= post_comment.user.name %></strong>
             <% end %>
             <span style="color: #808080;"><%= time_ago_in_words(post_comment.created_at) %>前</span>

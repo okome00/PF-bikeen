@@ -16,6 +16,7 @@ class User::UsersController < ApplicationController
   end
 
   def update ## 会員情報編集アクション
+    @user = User.find(params[:id])
     @user = current_user
     if @user.update(user_params)
       redirect_to user_path(@user)
@@ -27,7 +28,7 @@ class User::UsersController < ApplicationController
   private ## 会員情報データストロングパラメータ
 
   def user_params
-    params.require(:user).permit(:name, :bike_model, :introduction, :residence, :email)
+    params.require(:user).permit(:name, :bike_model, :introduction, :residence, :email, :profile_image)
   end
 
 end
