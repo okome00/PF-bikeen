@@ -3,7 +3,7 @@ class User::UsersController < ApplicationController
 
   def show ## 会員情報画面表示アクション
     @user = User.find(params[:id])
-    @posts = @user.posts.page(params[:page]).per(10)
+    @posts = @user.posts.page(params[:page]).per(3)
   end
 
   def edit ## 会員情報編集画面表示アクション

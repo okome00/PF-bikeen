@@ -29,7 +29,7 @@
           <p class="ml-2"><%= render_with_hashtags(@post.hashbody) %></p>
           <p class="ml-2"><%= @post.spot %></p>
           <span><i class="fas fa-calendar ml-2 mr-1"></i><%= l @post.created_at %>　|　</span>
-          <span class="favorites_buttons_<%= @post.id %>">
+          <span id="favorites_buttons_<%= @post.id %>">
             <%= render 'user/favorites/favorite', post: @post %>
           </span>
           <span><i class="fas fa-comments mr-1"></i><%= @post.post_comments.count %>　|　</span>

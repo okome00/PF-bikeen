@@ -330,6 +330,11 @@ ul {
   height: 30px;
 }
 
+.pagination {
+  margin: 50px 400px;
+  justify-content: center;
+}
+
 /* 検索結果画面 */
 .search-wrap {
   margin: 50px 150px;
@@ -371,12 +376,13 @@ ul {
   flex-wrap: wrap;
 }
 
-/* フォロワー一覧画面 */
+/* フォロー・フォロワー一覧画面 */
 .follow-wrap {
   margin: 0 auto;
   max-width: 400px;
   width: 100%;
   padding-top: 50px;
+  margin-bottom: 50px;
 }
 
 .follow-title {
